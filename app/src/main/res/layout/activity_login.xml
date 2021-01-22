@@ -36,7 +36,7 @@
                 app:hintTextColor="@color/inputTextColor">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/UserEmail_login"
+                    android:id="@+id/userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -60,7 +60,7 @@
                 app:hintTextColor="@color/inputTextColor">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/UserPassword"
+                    android:id="@+id/userPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

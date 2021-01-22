@@ -15,4 +15,6 @@
     <color name="inputTextColor">#8492A6</color>
     <color name="detailsRedColor">#EA2427</color>
     <color name="detailsBlueColor">#00A6FF</color>
+    <color name="backgroundColor">#DDDDDD</color>
+    <color name="titleColor">#1F2D3D</color>
 </resources>

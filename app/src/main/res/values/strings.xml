@@ -8,4 +8,5 @@
     <string name="createText">CREATE ACCOUNT</string>
     <string name="userName">Name</string>
     <string name="repeateUserPassword">Repeate password</string>
+    <string name="tv_search">Search Games</string>
 </resources>
