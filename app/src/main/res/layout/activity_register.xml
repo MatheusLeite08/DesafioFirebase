@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_img"
+    tools:context=".ui.RegisterActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="10dp"
+                android:textColorHint="@color/inputTextColor"
+                app:boxBackgroundColor="@color/inputLineColor"
+                app:boxStrokeColor="@color/inputLineColor"
+                app:hintTextColor="@color/inputTextColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/white"
+                    android:hint="@string/userName"
+                    android:textColor="@color/light_green"
+                    android:textColorHint="@color/inputTextColor"
+                    android:textSize="18dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:textColorHint="@color/inputTextColor"
+                app:boxBackgroundColor="@color/inputLineColor"
+                app:boxStrokeColor="@color/inputLineColor"
+                app:hintTextColor="@color/inputTextColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/white"
+                    android:hint="@string/userEmail"
+                    android:inputType="textWebEmailAddress"
+                    android:textColor="@color/light_green"
+                    android:textColorHint="@color/inputTextColor"
+                    android:textSize="18dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:textColorHint="@color/inputTextColor"
+                app:boxBackgroundColor="@color/inputLineColor"
+                app:boxStrokeColor="@color/inputLineColor"
+                app:hintTextColor="@color/inputTextColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerUserPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/white"
+                    android:hint="@string/userPassword"
+                    android:inputType="textPassword"
+                    android:textColor="@color/light_green"
+                    android:textColorHint="@color/inputTextColor"
+                    android:textSize="18dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:textColorHint="@color/inputTextColor"
+                app:boxBackgroundColor="@color/inputLineColor"
+                app:boxStrokeColor="@color/inputLineColor"
+                app:hintTextColor="@color/inputTextColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/repeateUserPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/white"
+                    android:hint="@string/repeateUserPassword"
+                    android:inputType="textPassword"
+                    android:textColor="@color/light_green"
+                    android:textColorHint="@color/inputTextColor"
+                    android:textSize="18dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/detailsRedColor"
+                android:text="@string/createText" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

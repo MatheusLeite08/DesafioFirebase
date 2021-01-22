@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Desafio Firebase</string>
+    <string name="userEmail">Email</string>
+    <string name="userPassword">Password</string>
+    <string name="rememberCheckbox">Remember</string>
+    <string name="loginText">LOG IN</string>
+    <string name="createAccount">Create account</string>
+    <string name="createText">CREATE ACCOUNT</string>
+    <string name="userName">Name</string>
+    <string name="repeateUserPassword">Repeate password</string>
+</resources>
