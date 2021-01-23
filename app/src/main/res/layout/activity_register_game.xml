@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_img"
+    tools:context=".ui.RegisterGameActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_roundedcorners"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.703">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            android:textColorHint="@color/inputTextColor"
+            app:boxBackgroundColor="@color/inputLineColor"
+            app:boxStrokeColor="@color/inputLineColor"
+            app:expandedHintEnabled="false"
+            app:hintTextColor="@color/inputTextColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_registerGameName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:hint="@string/userName"
+                android:lines="1"
+                android:textColor="@color/light_green"
+                android:textColorHint="@color/inputTextColor"
+                android:textSize="18dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColorHint="@color/inputTextColor"
+            app:boxBackgroundColor="@color/inputLineColor"
+            app:boxStrokeColor="@color/inputLineColor"
+            app:expandedHintEnabled="false"
+            app:hintTextColor="@color/inputTextColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_registerGameCreated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:hint="@string/registerGameCreated"
+                android:lines="1"
+                android:textColor="@color/light_green"
+                android:textColorHint="@color/inputTextColor"
+                android:textSize="18dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColorHint="@color/inputTextColor"
+            app:boxBackgroundColor="@color/inputLineColor"
+            app:boxStrokeColor="@color/inputLineColor"
+            app:expandedHintEnabled="false"
+            app:hintTextColor="@color/inputTextColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_registerGameDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:hint="@string/GameDescriptionLabel"
+                android:lines="4"
+                android:textColor="@color/light_green"
+                android:textColorHint="@color/inputTextColor"
+                android:textSize="18dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonSaveGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/floatingButtonColor"
+            android:text="@string/buttonSaveGame" />
+
+    </LinearLayout>
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/buttonRegisterGameImage"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginBottom="225dp"
+        android:src="@drawable/savegame_img"
+        app:civ_border_color="@color/floatingButtonColor"
+        app:civ_border_width="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

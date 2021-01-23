@@ -45,14 +45,17 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:listitem="@layout/item_game"/>
 
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fb_addGame"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:clickable="true"-->
-<!--            app:srcCompat="@drawable/ic_add"-->
-<!--            android:backgroundTint="@color/detailsRedColor"-->
-<!--            android:layout_gravity=""/>-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fb_addGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_add"
+            android:backgroundTint="@color/floatingButtonColor"
+            app:tint="@color/white"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

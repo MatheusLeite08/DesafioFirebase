@@ -9,4 +9,7 @@
     <string name="userName">Name</string>
     <string name="repeateUserPassword">Repeate password</string>
     <string name="tv_search">Search Games</string>
+    <string name="registerGameCreated">Created at</string>
+    <string name="GameDescriptionLabel">Description</string>
+    <string name="buttonSaveGame">SAVE GAME</string>
 </resources>

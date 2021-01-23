@@ -41,6 +41,10 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
         }
 
         viewModel.getGamesListInCloud()
+
+        fb_addGame.setOnClickListener {
+            callRegisterGame()
+        }
     }
 
     override fun gameClick(position: Int) {
@@ -49,5 +53,10 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
 
             Toast.makeText(this, game.name, Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun callRegisterGame(){
+        var intent = Intent(this, RegisterGameActivity::class.java)
+        startActivity(intent)
     }
 }

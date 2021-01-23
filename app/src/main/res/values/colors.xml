@@ -17,4 +17,5 @@
     <color name="detailsBlueColor">#00A6FF</color>
     <color name="backgroundColor">#DDDDDD</color>
     <color name="titleColor">#1F2D3D</color>
+    <color name="floatingButtonColor">#FF5252</color>
 </resources>
