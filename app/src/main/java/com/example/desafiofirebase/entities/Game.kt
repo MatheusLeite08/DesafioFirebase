@@ -1,9 +1,9 @@
 package com.example.desafiofirebase.entities
 
 data class Game(
-    val id: Int,
-    var image: String,
-    var name: String,
-    var yearCreation: String,
-    var description: String
+    val gameId: String = "",
+    var gameYearCreation: String = "",
+    var gameName: String = "",
+    var gameImage: String = "",
+    var gameDescription: String = ""
 )

@@ -22,9 +22,9 @@ class GamesListAdapter(val listener: onGameClickListener): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: GamesListViewHolder, position: Int) {
         val currentItem: Game = gamesList[position]
 
-        holder.gameName.setText(currentItem.name)
-        holder.yearCreation.setText(currentItem.yearCreation)
-        Picasso.get().load(currentItem.image).into(holder.gameImage)
+        holder.gameName.setText(currentItem.gameName)
+        holder.yearCreation.setText(currentItem.gameYearCreation)
+        Picasso.get().load(currentItem.gameImage).into(holder.gameImage)
 
     }
 
