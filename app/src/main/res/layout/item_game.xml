@@ -20,7 +20,7 @@
             android:layout_height="130dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/splash_img" />
+            android:background="@color/inputTextColor"/>
 
         <TextView
             android:id="@+id/tv_gameName"

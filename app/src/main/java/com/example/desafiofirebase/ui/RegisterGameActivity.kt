@@ -23,7 +23,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class RegisterGameActivity : AppCompatActivity() {
-    val scope = CoroutineScope(Dispatchers.Main)
 
     //Storage
     lateinit var alertDialog: AlertDialog
@@ -38,8 +37,9 @@ class RegisterGameActivity : AppCompatActivity() {
     //Variáveis
     var isNewGame = false
     var userId = ""
-    var gameId = ""
     var saveGame = false
+    var updatedGame = Game()
+    var gameId = ""
     var urlImage = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +65,8 @@ class RegisterGameActivity : AppCompatActivity() {
         buttonSaveGame.setOnClickListener {
             if (dataVerification()) {
                 updateGameData()
-                Toast.makeText(this, "Game saved successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Game saved successfully", Toast.LENGTH_LONG).show()
+                callHome()
             }
         }
 
@@ -82,10 +83,6 @@ class RegisterGameActivity : AppCompatActivity() {
         alertDialog = SpotsDialog.Builder().setContext(this).build()
 
         var imgId = "$userId/$gameId"
-
-        Log.i("userId", userId)
-        Log.i("gameId", gameId)
-        Log.i("imagId", imgId)
 
         //Receber o id do game gerado pela criação da "reserva" no Realtime Database mais o userId
         //Essa junção de id's é feita para evitar conflitos e cada user ter uma pasta no Storage
@@ -145,7 +142,7 @@ class RegisterGameActivity : AppCompatActivity() {
     }
 
     fun updateGameData() {
-        var updatedGame = Game(
+        updatedGame = Game(
             gameId,
             tv_registerGameCreated.text.toString(),
             tv_registerGameName.text.toString(),
@@ -205,7 +202,12 @@ class RegisterGameActivity : AppCompatActivity() {
         if (saveGame == false) {
             deleteGame()
         }
+    }
 
+    fun callHome() {
+        var intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("userId", userId)
+        startActivity(intent)
     }
 
 }

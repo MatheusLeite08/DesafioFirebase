@@ -24,7 +24,9 @@ class GamesListAdapter(val listener: onGameClickListener): RecyclerView.Adapter<
 
         holder.gameName.setText(currentItem.gameName)
         holder.yearCreation.setText(currentItem.gameYearCreation)
-        Picasso.get().load(currentItem.gameImage).into(holder.gameImage)
+
+        if (currentItem.gameImage.isNotEmpty())
+            Picasso.get().load(currentItem.gameImage).into(holder.gameImage)
 
     }
 
@@ -56,7 +58,7 @@ class GamesListAdapter(val listener: onGameClickListener): RecyclerView.Adapter<
     }
 
     fun addList(list: ArrayList<Game>) {
-        gamesList.addAll(list)
+        gamesList = list
         notifyDataSetChanged()
     }
 

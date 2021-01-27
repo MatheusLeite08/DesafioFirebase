@@ -44,7 +44,7 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
 
         //Recepção dos dados
         val extras = intent.extras
-        userId = extras!!.getString("idUser").toString()
+        userId = extras!!.getString("userId").toString()
 
         conectDatabase(userId)
 
@@ -54,12 +54,6 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
         rv_gamesListHome.layoutManager = gamesListLayoutManager
         gamesListAdapter = GamesListAdapter(this)
         rv_gamesListHome.adapter = gamesListAdapter
-
-//        viewModel.returnFirebase.observe(this) {
-//            gamesListAdapter.addList(it)
-//        }
-
-//        viewModel.getGamesListInCloud(database, reference)
 
         fb_addGame.setOnClickListener {
             callRegisterGame()
@@ -99,20 +93,23 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
                 }
 
                 gamesListAdapter.addList(gamesList)
+                gamesList = arrayListOf()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.w("HomeViewModel", "Failed to read value.", error.toException())
+                Toast.makeText(this@HomeActivity, error.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     override fun gameClick(position: Int) {
-        viewModel.returnFirebase.observe(this) {
-            var game = it.get(position)
+        var gamesList = gamesListAdapter.gamesList
+        var game = gamesList.get(position)
 
-            Toast.makeText(this, game.gameName, Toast.LENGTH_LONG).show()
-        }
+        var intent = Intent(this, GameDetailsActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("game", game)
+        startActivity(intent)
     }
 
     fun callRegisterGame() {

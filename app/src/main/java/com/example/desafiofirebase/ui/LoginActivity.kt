@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun callHome(idUser: String) {
         var intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("idUser", idUser)
+        intent.putExtra("userId", idUser)
         startActivity(intent)
     }
 }
