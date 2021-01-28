@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_game_details.*
 class GameDetailsActivity : AppCompatActivity() {
     //Variáveis
     var userId = ""
+    var game = Game()
     var gameId: String = ""
     var gameYearCreation: String = ""
     var gameName: String = ""
@@ -30,12 +31,16 @@ class GameDetailsActivity : AppCompatActivity() {
             callHome()
         }
 
+        fb_editGame.setOnClickListener {
+            callEditGamePage()
+        }
+
         //Recepção dos dados
         val extras = intent.extras
         userId = extras!!.getString("userId").toString()
 
-        val game = intent.getSerializableExtra("game") as? Game
-        gameId = game!!.gameId
+        game = (intent.getSerializableExtra("game") as? Game)!!
+        gameId = game.gameId
         gameYearCreation = game.gameYearCreation
         gameName = game.gameName
         gameImage = game.gameImage
@@ -58,6 +63,15 @@ class GameDetailsActivity : AppCompatActivity() {
     fun callHome() {
         var intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("userId", userId)
+        startActivity(intent)
+    }
+
+    fun callEditGamePage(){
+        var intent = Intent(this, RegisterGameActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("isNew", false)
+        intent.putExtra("game", game)
+
         startActivity(intent)
     }
 }

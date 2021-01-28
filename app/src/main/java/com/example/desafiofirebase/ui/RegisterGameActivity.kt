@@ -35,6 +35,7 @@ class RegisterGameActivity : AppCompatActivity() {
     private lateinit var reference: DatabaseReference
 
     //Variáveis
+    var game = Game()
     var isNewGame = false
     var userId = ""
     var saveGame = false
@@ -59,14 +60,32 @@ class RegisterGameActivity : AppCompatActivity() {
         //Aqui é verificado se o usuário quer add um novo game ou atualizar um já existente
         if (isNewGame == true) {
             createNewGameScope()
+        }else{
+            game = (intent.getSerializableExtra("game") as? Game)!!
+
+            tv_registerGameName.setText(game.gameName)
+            tv_registerGameCreated.setText(game.gameYearCreation)
+            tv_registerGameDescription.setText(game.gameDescription)
+
+            if(game.gameImage.isNotEmpty())
+                showImage(game.gameImage)
+
+            gameId = game.gameId
+            urlImage = game.gameImage
         }
 
-        //Salvar as informações do game (unica informação obrigatório é o Nome)
+        //Salvar as informações do game (única informação obrigatória é o Nome)
         buttonSaveGame.setOnClickListener {
             if (dataVerification()) {
                 updateGameData()
-                Toast.makeText(this, "Game saved successfully", Toast.LENGTH_LONG).show()
-                callHome()
+
+                if(isNewGame == true) {
+                    Toast.makeText(this, "Game saved successfully", Toast.LENGTH_LONG).show()
+                    callHome()
+                }else{
+                    Toast.makeText(this, "Game updated successfully", Toast.LENGTH_LONG).show()
+                    callGameDetailsPage()
+                }
             }
         }
 
@@ -81,11 +100,13 @@ class RegisterGameActivity : AppCompatActivity() {
 
     fun config(gameId: String) {
         alertDialog = SpotsDialog.Builder().setContext(this).build()
+        var extensionId = reference.push().key.toString()
 
-        var imgId = "$userId/$gameId"
+        var imgId = "$userId/$gameId-$extensionId"
 
-        //Receber o id do game gerado pela criação da "reserva" no Realtime Database mais o userId
-        //Essa junção de id's é feita para evitar conflitos e cada user ter uma pasta no Storage
+        //Receber o id do game, o userId e uma extension sempre que o usuário muda a imagem do game
+        //Essa junção de id's é feita para evitar conflitos, cada User ter uma pasta no Storage e
+        //sempre atualizar em tempo real o app
         storageReference = FirebaseStorage.getInstance().getReference(imgId)
     }
 
@@ -99,7 +120,9 @@ class RegisterGameActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == CODE_IMG) {
+        if (requestCode == CODE_IMG && data != null) {
+            config(gameId)
+
             alertDialog.show()
             var uploadFile = storageReference.putFile(data!!.data!!)
             var task = uploadFile.continueWithTask { task ->
@@ -114,8 +137,9 @@ class RegisterGameActivity : AppCompatActivity() {
                     urlImage = downloadUri!!.toString()
                         .substring(0, downloadUri.toString().indexOf("&token"))
 
-                    showImage(urlImage)
-                    Log.i("urlImage", urlImage)
+                    if(urlImage.isNotEmpty())
+                        showImage(urlImage)
+
                     alertDialog.dismiss()
 
                 }
@@ -131,7 +155,7 @@ class RegisterGameActivity : AppCompatActivity() {
     }
 
     fun createNewGameScope() {
-        gameId = reference.push().key.toString()
+        gameId = reference.push().key.toString() //Criação do ID do game
         var gameScope = Game(gameId = gameId)
 
         FirebaseDatabase.getInstance().reference
@@ -199,7 +223,7 @@ class RegisterGameActivity : AppCompatActivity() {
         //Como a metodologia adotada é: Criar uma "reserva" para o novo game no Firebase Realtime
         //antes do usuário preencher os campos, caso ele não salve o novo game, é preciso excluir
         //a "reserva" feita.
-        if (saveGame == false) {
+        if (saveGame == false && isNewGame == true) {
             deleteGame()
         }
     }
@@ -207,6 +231,14 @@ class RegisterGameActivity : AppCompatActivity() {
     fun callHome() {
         var intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("userId", userId)
+        startActivity(intent)
+    }
+
+    fun callGameDetailsPage(){
+        var intent = Intent(this, GameDetailsActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("game", updatedGame)
+
         startActivity(intent)
     }
 
