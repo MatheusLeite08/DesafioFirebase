@@ -42,6 +42,7 @@ class RegisterGameActivity : AppCompatActivity() {
     var updatedGame = Game()
     var gameId = ""
     var urlImage = ""
+    var imgId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +73,7 @@ class RegisterGameActivity : AppCompatActivity() {
 
             gameId = game.gameId
             urlImage = game.gameImage
+            imgId = game.imgId
         }
 
         //Salvar as informações do game (única informação obrigatória é o Nome)
@@ -102,12 +104,26 @@ class RegisterGameActivity : AppCompatActivity() {
         alertDialog = SpotsDialog.Builder().setContext(this).build()
         var extensionId = reference.push().key.toString()
 
-        var imgId = "$userId/$gameId-$extensionId"
+        if(urlImage.isNotEmpty())
+            deleteImgOld(urlImage)
+
+        imgId = "$userId/$gameId/$extensionId"
 
         //Receber o id do game, o userId e uma extension sempre que o usuário muda a imagem do game
         //Essa junção de id's é feita para evitar conflitos, cada User ter uma pasta no Storage e
         //sempre atualizar em tempo real o app
         storageReference = FirebaseStorage.getInstance().getReference(imgId)
+    }
+
+    //Esta function exclui um recurso salvo no Storage
+    fun deleteImgOld(urlImage: String){
+        // Referência para a imagem do Storege a ser excluída
+        val desertRef = FirebaseStorage.getInstance().getReference().child(urlImage)
+        desertRef.delete().addOnSuccessListener {
+            Toast.makeText(this, "Excluiu", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Log.i("Não foi. Erro:", it.message.toString())
+        }
     }
 
     fun getImg() {
@@ -171,7 +187,8 @@ class RegisterGameActivity : AppCompatActivity() {
             tv_registerGameCreated.text.toString(),
             tv_registerGameName.text.toString(),
             urlImage,
-            tv_registerGameDescription.text.toString()
+            tv_registerGameDescription.text.toString(),
+            imgId
         )
 
         FirebaseDatabase.getInstance().reference

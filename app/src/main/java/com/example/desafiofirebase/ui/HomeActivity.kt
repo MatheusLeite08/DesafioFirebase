@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
 
     //Variáveis
     var userId = ""
-    var userName = ""
+    var isNewUser = false
 
     val viewModel by viewModels<HomeViewModel> {
         object : ViewModelProvider.Factory {
@@ -45,8 +45,16 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
         //Recepção dos dados
         val extras = intent.extras
         userId = extras!!.getString("userId").toString()
+        isNewUser = extras!!.getBoolean("isNewUser")
 
         conectDatabase(userId)
+
+        if (isNewUser == true) {
+            var username = extras!!.getString("username").toString()
+            saveUsername(username)
+        } else {
+            getUsername()
+        }
 
         getGamesListInCloud()
 
@@ -66,6 +74,35 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
     fun conectDatabase(userId: String) {
         database = FirebaseDatabase.getInstance()
         reference = database.getReference(userId) //Receber o id do usuário
+    }
+
+    fun saveUsername(username: String) {
+        FirebaseDatabase.getInstance().reference
+            .child(userId)
+            .child("username")
+            .setValue(username)
+
+        Toast.makeText(this, "Welcome ${username}", Toast.LENGTH_SHORT).show()
+    }
+
+    fun getUsername() {
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot.children.forEach {
+                    if (it.key == "username") {
+                        Toast.makeText(
+                            this@HomeActivity,
+                            "Welcome back ${it.value}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@HomeActivity, error.message, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     fun getGamesListInCloud() {
@@ -97,7 +134,7 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@HomeActivity, error.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@HomeActivity, error.message, Toast.LENGTH_LONG).show()
             }
         })
     }

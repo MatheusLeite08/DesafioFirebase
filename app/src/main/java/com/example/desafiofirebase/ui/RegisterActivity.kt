@@ -55,7 +55,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this,
-                        "Unable to register. ERROR: ${task.exception?.message}",
+                        "${task.exception?.message}",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -65,7 +65,8 @@ class RegisterActivity : AppCompatActivity() {
 
     fun callHome(idUser: String, username: String) {
         var intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("idUser", idUser)
+        intent.putExtra("userId", idUser)
+        intent.putExtra("isNewUser", true)
         intent.putExtra("username", username)
         startActivity(intent)
     }

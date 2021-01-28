@@ -7,5 +7,6 @@ data class Game(
     var gameYearCreation: String = "",
     var gameName: String = "",
     var gameImage: String = "",
-    var gameDescription: String = ""
+    var gameDescription: String = "",
+    var imgId: String = ""
 ): Serializable

@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this,
-                        "Unable to login. ERROR: ${task.exception?.message}",
+                        "${task.exception?.message}",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -68,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
     fun callHome(idUser: String) {
         var intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("userId", idUser)
+        intent.putExtra("isNewUser", false)
         startActivity(intent)
     }
 }
