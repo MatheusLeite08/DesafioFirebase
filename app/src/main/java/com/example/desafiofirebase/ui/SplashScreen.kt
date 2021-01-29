@@ -22,7 +22,7 @@ class SplashScreen : AppCompatActivity() {
     fun splashCoroutine(){
         val intent = Intent(this, LoginActivity::class.java)
         scope.launch {
-            delay(2000)
+            delay(3000)
 
             startActivity(intent)
             finish()

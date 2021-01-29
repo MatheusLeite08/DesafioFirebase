@@ -28,7 +28,6 @@ class RegisterGameActivity : AppCompatActivity() {
     lateinit var alertDialog: AlertDialog
     lateinit var storageReference: StorageReference
     private val CODE_IMG = 1000
-    private var authorizedShipping = false
 
     //Realtime Database
     private lateinit var database: FirebaseDatabase
@@ -55,7 +54,7 @@ class RegisterGameActivity : AppCompatActivity() {
 
         //Realtime Database ------------------------------------------------------------------------
 
-        //Cada usuário tem um "nó" do banco de dados
+        //Cada usuário tem um "nó" do Banco de Dados
         conectDatabase(userId)
 
         //Aqui é verificado se o usuário quer add um novo game ou atualizar um já existente
@@ -102,34 +101,21 @@ class RegisterGameActivity : AppCompatActivity() {
 
     fun config(gameId: String) {
         alertDialog = SpotsDialog.Builder().setContext(this).build()
-        var extensionId = reference.push().key.toString()
-
-        if(urlImage.isNotEmpty())
-            deleteImgOld(urlImage)
+        var extensionId = reference.push().key.toString() //Criação da extension do ID da imagem
 
         imgId = "$userId/$gameId/$extensionId"
 
-        //Receber o id do game, o userId e uma extension sempre que o usuário muda a imagem do game
-        //Essa junção de id's é feita para evitar conflitos, cada User ter uma pasta no Storage e
-        //sempre atualizar em tempo real o app
+        //Sempre que o usuário muda a imagem do game é criado um ID exclusivo para essa imagem
+        //a partir do ID do game, do ID do usuário e de uma extension.
+        //Essa junção de ID's é feita para evitar conflitos e para que cada usuário tenha uma pasta
+        //no Storage.
         storageReference = FirebaseStorage.getInstance().getReference(imgId)
-    }
-
-    //Esta function exclui um recurso salvo no Storage
-    fun deleteImgOld(urlImage: String){
-        // Referência para a imagem do Storege a ser excluída
-        val desertRef = FirebaseStorage.getInstance().getReference().child(urlImage)
-        desertRef.delete().addOnSuccessListener {
-            Toast.makeText(this, "Excluiu", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener {
-            Log.i("Não foi. Erro:", it.message.toString())
-        }
     }
 
     fun getImg() {
         var intent = Intent()
         intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT //VER SE É ESSA ACTION MESMO
+        intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Captura Imagem"), CODE_IMG)
     }
 
@@ -167,7 +153,7 @@ class RegisterGameActivity : AppCompatActivity() {
 
     fun conectDatabase(userId: String) {
         database = FirebaseDatabase.getInstance()
-        reference = database.getReference(userId) //Receber o id do usuário
+        reference = database.getReference(userId)
     }
 
     fun createNewGameScope() {
@@ -220,7 +206,7 @@ class RegisterGameActivity : AppCompatActivity() {
         if (yearCreation.length != 0)
             yearCreationVerification = (yearCreation.length == 4)
 
-        //Informar ao usuário o que está invalido
+        //Informa ao usuário o que está inválido
         if (nameVerification == false)
             Toast.makeText(this, "Game name is required", Toast.LENGTH_LONG).show()
 

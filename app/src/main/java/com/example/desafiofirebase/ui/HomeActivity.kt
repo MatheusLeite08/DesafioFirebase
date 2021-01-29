@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.desafiofirebase.R
 import com.example.desafiofirebase.adapters.GamesListAdapter
 import com.example.desafiofirebase.entities.Game
-import com.example.desafiofirebase.models.HomeViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
@@ -30,14 +29,6 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
     var userId = ""
     var isNewUser = false
 
-    val viewModel by viewModels<HomeViewModel> {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return HomeViewModel() as T
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -52,8 +43,6 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
         if (isNewUser == true) {
             var username = extras!!.getString("username").toString()
             saveUsername(username)
-        } else {
-            getUsername()
         }
 
         getGamesListInCloud()
@@ -83,26 +72,6 @@ class HomeActivity : AppCompatActivity(), GamesListAdapter.onGameClickListener {
             .setValue(username)
 
         Toast.makeText(this, "Welcome ${username}", Toast.LENGTH_SHORT).show()
-    }
-
-    fun getUsername() {
-        reference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot.children.forEach {
-                    if (it.key == "username") {
-                        Toast.makeText(
-                            this@HomeActivity,
-                            "Welcome back ${it.value}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@HomeActivity, error.message, Toast.LENGTH_LONG).show()
-            }
-        })
     }
 
     fun getGamesListInCloud() {

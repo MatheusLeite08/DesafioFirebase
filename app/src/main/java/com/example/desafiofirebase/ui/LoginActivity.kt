@@ -17,8 +17,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        //Login automático
         val user = FirebaseAuth.getInstance().currentUser
-        if(user != null){
+        if (user != null) {
             callHome(user.uid)
         }
 
@@ -47,12 +48,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun login(email: String, password: String){
+    //Login com Firebase
+    fun login(email: String, password: String) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val firebaseUser: FirebaseUser = task.result?.user!!
                     val idUser = firebaseUser.uid
+
                     callHome(idUser)
                 } else {
                     Toast.makeText(
